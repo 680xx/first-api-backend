@@ -109,3 +109,4 @@ C:\Users\lia\source\repos\_projects\first-api-backend\obj\Debug\net8.0\refint\fi
 C:\Users\lia\source\repos\_projects\first-api-backend\obj\Debug\net8.0\first-api-backend.pdb
 C:\Users\lia\source\repos\_projects\first-api-backend\obj\Debug\net8.0\first-api-backend.genruntimeconfig.cache
 C:\Users\lia\source\repos\_projects\first-api-backend\obj\Debug\net8.0\ref\first-api-backend.dll
+C:\Users\lia\source\repos\_projects\first-api-backend\obj\Debug\net8.0\first-api-backend.sourcelink.json
