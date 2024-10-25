@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "Qs5fmT1plX+0HWybisupMUt3OUamrgJR7CK2+BLUb1g=",
+  "Source": "first-api-backend",
+  "BasePath": "_content/first-api-backend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
