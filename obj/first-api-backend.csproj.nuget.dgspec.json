@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lia\\source\\repos\\_projects\\first-api-backend\\first-api-backend.csproj": {}
+    "C:\\Users\\lia\\source\\repositories\\first-api-backend\\first-api-backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lia\\source\\repos\\_projects\\first-api-backend\\first-api-backend.csproj": {
+    "C:\\Users\\lia\\source\\repositories\\first-api-backend\\first-api-backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lia\\source\\repos\\_projects\\first-api-backend\\first-api-backend.csproj",
+        "projectUniqueName": "C:\\Users\\lia\\source\\repositories\\first-api-backend\\first-api-backend.csproj",
         "projectName": "first-api-backend",
-        "projectPath": "C:\\Users\\lia\\source\\repos\\_projects\\first-api-backend\\first-api-backend.csproj",
+        "projectPath": "C:\\Users\\lia\\source\\repositories\\first-api-backend\\first-api-backend.csproj",
         "packagesPath": "C:\\Users\\lia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lia\\source\\repos\\_projects\\first-api-backend\\obj\\",
+        "outputPath": "C:\\Users\\lia\\source\\repositories\\first-api-backend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

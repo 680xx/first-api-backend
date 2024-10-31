@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ajWkIH+zI+o=",
+  "dgSpecHash": "rjTAT8HTjtQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\lia\\source\\repos\\_projects\\first-api-backend\\first-api-backend.csproj",
+  "projectFilePath": "C:\\Users\\lia\\source\\repositories\\first-api-backend\\first-api-backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lia\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\lia\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.10\\microsoft.aspnetcore.openapi.8.0.10.nupkg.sha512",
