@@ -13,6 +13,7 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.10",
           "Microsoft.AspNetCore.OpenApi": "8.0.10",
           "Microsoft.EntityFrameworkCore.Design": "8.0.10",
+          "Microsoft.EntityFrameworkCore.Tools": "8.0.10",
           "Microsoft.Identity.Web": "3.3.0",
           "Npgsql": "8.0.5",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.10",
@@ -552,6 +553,11 @@
             "assemblyVersion": "8.0.10.0",
             "fileVersion": "8.0.1024.46708"
           }
+        }
+      },
+      "Microsoft.EntityFrameworkCore.Tools/8.0.10": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Design": "8.0.10"
         }
       },
       "Microsoft.Extensions.ApiDescription.Server/6.0.5": {},
@@ -1459,6 +1465,13 @@
       "sha512": "sha512-OefBEE47kGKPRPV3OT+FAW6o5BFgLk2D9EoeWVy7NbOepzUneayLQxbVE098FfedTyMwxvZQoDD9LrvZc3MadA==",
       "path": "microsoft.entityframeworkcore.relational/8.0.10",
       "hashPath": "microsoft.entityframeworkcore.relational.8.0.10.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.Tools/8.0.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-aaimNUjkJDHdZb2hxd6hjwz7OdeankbQHPx8/b+qCfVfaEpOAIW0LTBge4qG+AUKacKfcoK7GJq6ACjenEvPLQ==",
+      "path": "microsoft.entityframeworkcore.tools/8.0.10",
+      "hashPath": "microsoft.entityframeworkcore.tools.8.0.10.nupkg.sha512"
     },
     "Microsoft.Extensions.ApiDescription.Server/6.0.5": {
       "type": "package",

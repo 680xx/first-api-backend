@@ -85,6 +85,11 @@ namespace first_api_backend.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("text");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("character varying(13)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
@@ -135,6 +140,10 @@ namespace first_api_backend.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator().HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -241,6 +250,17 @@ namespace first_api_backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Companies");
+                });
+
+            modelBuilder.Entity("first_api_backend.Models.AppUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("varchar(150)");
+
+                    b.HasDiscriminator().HasValue("AppUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
