@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -82,6 +83,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(options =>
+    options.WithOrigins("http://localhost:4200")
+        .AllowAnyMethod()
+        .AllowAnyHeader());
+
 // app.UseHttpsRedirection();
 
 // app.UseAuthentication();
@@ -93,5 +99,31 @@ app
     .MapGroup("/api")
     .MapIdentityApi<AppUser>();
 
+app.MapPost("/api/signup", async(
+        UserManager<AppUser> userManager,
+        [FromBody] UserRegistrationModel userRegistrationModel
+        ) =>
+        {
+            AppUser user = new AppUser()
+            {
+                Email = userRegistrationModel.Email,
+                UserName = userRegistrationModel.Email,
+                FullName = userRegistrationModel.FullName,
+            };
+            var result = await userManager.CreateAsync(user, userRegistrationModel.Password);
+
+            if (result.Succeeded)
+                return Results.Ok(result);
+            else
+                return Results.BadRequest(result);
+        });
+
 app.Run();
+
+public class UserRegistrationModel
+{
+    public string Email { get; set; }
+    public string Password { get; set; }
+    public string FullName { get; set; }
+}
 
