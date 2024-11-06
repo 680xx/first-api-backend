@@ -1,12 +1,6 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using first_api_backend.Controllers;
 using first_api_backend.Extensions;
 using first_api_backend.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,8 +15,6 @@ builder.Services.AddSwaggerExplorer()
                 .ConfigureIdentityOptions()
                 .AddIdentityAuth(builder.Configuration);
 
-
-
 var app = builder.Build();
 
 app.ConfigureSwaggerExplorer()
@@ -34,8 +26,6 @@ app.MapGroup("/api")
     .MapIdentityApi<AppUser>();
 app.MapGroup("/api")
     .MapIdentityUserEndpoints();
-
-
 
 app.Run();
 
