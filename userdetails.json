@@ -1,0 +1,57 @@
+[
+  {
+    "email": "admin@commodore.com",
+    "password": "admin#",
+    "fullName": "Administrator Adminson",
+    "role": "Admin",
+    "gender": "Male",
+    "age": 44,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOiJkMmZiZTJmNC05MzEyLTRjNmUtOTRiOS1mMzVjNGMxZmJlZTIiLCJHZW5kZXIiOiJNYWxlIiwiQWdlIjoiNDQiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzA5ODI1NjQsImV4cCI6MTczMTg0NjU2NCwiaWF0IjoxNzMwOTgyNTY0fQ._SCK1XuuOJbEtFDAuo2Q9SC8E2CU4wmEfr5ibh_Q4Yg"
+  },
+  {
+    "email": "owner@commodore.com",
+    "password": "owner#",
+    "fullName": "Jack Tramiel",
+    "role": "Owner",
+    "gender": "Male",
+    "age": 63,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOiJiY2E0ZDMxMy1mNzA5LTQ2MDQtODAwNC02ZjhkY2RkNjJhMDMiLCJHZW5kZXIiOiJNYWxlIiwiQWdlIjoiNjMiLCJyb2xlIjoiT3duZXIiLCJuYmYiOjE3MzA5ODIzMDgsImV4cCI6MTczMTg0NjMwOCwiaWF0IjoxNzMwOTgyMzA4fQ.-dimqtjj5zW2l5quYjOV6VwONonU2uc75w3t_7YmcSw"
+  },
+  {
+    "email": "user1@commodore.com",
+    "password": "user1#",
+    "fullName": "Roberta Williams",
+    "role": "User",
+    "gender": "Female",
+    "age": 28,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOiJjNWRhZmY4NS1kNjJmLTRlY2ItYjkyYS0zNmRiZTE2YzZkZjgiLCJHZW5kZXIiOiJGZW1hbGUiLCJBZ2UiOiIyOCIsInJvbGUiOiJVc2VyIiwibmJmIjoxNzMwOTgyNTg4LCJleHAiOjE3MzE4NDY1ODgsImlhdCI6MTczMDk4MjU4OH0.A24aHdpjp_QyWFMs4cgwLFpEzkqINw-QqtHATUSpBfE"
+  },
+  {
+    "email": "user2@commodore.com",
+    "password": "user2#",
+    "fullName": "User Fine",
+    "role": "User",
+    "gender": "Female",
+    "age": 19,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOiI3YTRiMGE4Yy1kNjY3LTQyMDItYWExOC03YWI3Mzg0NTI5NWYiLCJHZW5kZXIiOiJGZW1hbGUiLCJBZ2UiOiIxOSIsInJvbGUiOiJVc2VyIiwibmJmIjoxNzMwOTgyNjA0LCJleHAiOjE3MzE4NDY2MDQsImlhdCI6MTczMDk4MjYwNH0.4G2UkjwFZbdCrmBUYZRJtOiivxGDi78sKRq25eSjvsc"
+  },
+  {
+    "email": "user3@commodore.com",
+    "password": "user3#",
+    "fullName": "Ken Williams",
+    "role": "User",
+    "gender": "Male",
+    "age": 26,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOiI2ZTFhODc2ZS0yOGE5LTRlYmItYjZmZi04MjYxMGJkZjU2MWIiLCJHZW5kZXIiOiJNYWxlIiwiQWdlIjoiMjYiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTczMDk4MjYyMSwiZXhwIjoxNzMxODQ2NjIxLCJpYXQiOjE3MzA5ODI2MjF9.vwjUQ57GzvjxazE2MxWYFYB9BVKiCPYDNWB17YdwTmY"
+  },
+  {
+    "email": "user4@commodore.com",
+    "password": "user4#",
+    "fullName": "User Less",
+    "role": "User",
+    "gender": "Male",
+    "age": 1,
+    "libraryId": 5925732,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOiI0MTM0NWQ1NC01ZmQyLTRkNDItODU2YS1jMmRiN2MzZWZlNTUiLCJHZW5kZXIiOiJNYWxlIiwiQWdlIjoiMSIsInJvbGUiOiJVc2VyIiwiTGlicmFyeUlEIjoiNTkyNTczMiIsIm5iZiI6MTczMDk4NDAyNSwiZXhwIjoxNzMxODQ4MDI1LCJpYXQiOjE3MzA5ODQwMjV9.cv_ffwFLFNiqFgbZ-xs4m-yNynGw5fMyxPYPlHTYdJE"
+  }
+]

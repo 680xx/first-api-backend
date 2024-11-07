@@ -2,6 +2,7 @@
 using first_api_backend.Context;
 using first_api_backend.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
@@ -12,6 +13,7 @@ public static class IdentityExtensions
     public static IServiceCollection AddIdentityHandlersAndStores(this IServiceCollection services)
     {
         services.AddIdentityApiEndpoints<AppUser>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
         return services;
     }
@@ -35,12 +37,9 @@ public static class IdentityExtensions
         this IServiceCollection services,
         IConfiguration config)
     {
-        services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = 
-                x.DefaultChallengeScheme = 
-                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(y =>
+        services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(y =>
             {
                 y.SaveToken = false;
                 y.TokenValidationParameters = new TokenValidationParameters
@@ -48,9 +47,26 @@ public static class IdentityExtensions
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(
                         Encoding.UTF8.GetBytes(
-                            config["AppSettings:JWTSecret"]!))
+                            config["AppSettings:JWTSecret"]!)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
                 };
             });
+        // Kräver att man är inloggad för att nå endpoints
+        services.AddAuthorization(options =>
+        {
+            options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                .RequireAuthenticatedUser()
+                .Build();
+
+            options.AddPolicy("HasLibraryID", policy => policy.RequireClaim("LibraryID"));
+            options.AddPolicy("FemalesOnly", policy => policy.RequireClaim("Gender", "Female"));
+            options.AddPolicy("MaleOnly", policy => policy.RequireClaim("Gender", "Male"));
+            options.AddPolicy("Under10", policy => policy.RequireAssertion(context => 
+                Int32.Parse(context.User.Claims.First(x => x.Type=="Age").Value)<10));
+                    
+        });
         return services;
     }
     

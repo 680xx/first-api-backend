@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using first_api_backend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -15,6 +16,10 @@ namespace first_api_backend.Controllers
         public string Email { get; set; }
         public string Password { get; set; }
         public string FullName { get; set; }
+        public string Role { get; set; }
+        public string Gender { get; set; }
+        public int Age { get; set; }
+        public int? LibraryID { get; set; }
     }
 
     public class LoginModel
@@ -28,24 +33,27 @@ namespace first_api_backend.Controllers
         public static IEndpointRouteBuilder MapIdentityUserEndpoints(this IEndpointRouteBuilder app)
         {
             app.MapPost("/signup", CreateUser);
-
             app.MapPost("/signin", SignIn);
             return app;
-
         }
-
+        
+        [AllowAnonymous]
         private static async Task<IResult> CreateUser(UserManager<AppUser> userManager,
             [FromBody] UserRegistrationModel userRegistrationModel)
         {
             AppUser user = new AppUser()
             {
-                Email = userRegistrationModel.Email,
                 UserName = userRegistrationModel.Email,
+                Email = userRegistrationModel.Email,
                 FullName = userRegistrationModel.FullName,
+                Gender = userRegistrationModel.Gender,
+                DOB = DateOnly.FromDateTime(DateTime.Now.AddYears(-userRegistrationModel.Age)),
+                LibararyID = userRegistrationModel.LibraryID,
             };
             var result = await userManager.CreateAsync(
                 user,
                 userRegistrationModel.Password);
+            await userManager.AddToRoleAsync(user, userRegistrationModel.Role);
 
             if (result.Succeeded)
                 return Results.Ok(result);
@@ -53,6 +61,7 @@ namespace first_api_backend.Controllers
                 return Results.BadRequest(result);
         }
 
+        [AllowAnonymous]
         private static async Task<IResult> SignIn(UserManager<AppUser> userManager,
             [FromBody] LoginModel loginModel,
             IOptions<AppSettings> appSettings)
@@ -60,15 +69,22 @@ namespace first_api_backend.Controllers
             var user = await userManager.FindByEmailAsync(loginModel.Email);
             if (user != null && await userManager.CheckPasswordAsync(user, loginModel.Password))
             {
+                var roles = await userManager.GetRolesAsync(user);
                 var signInKey = new SymmetricSecurityKey(
                     Encoding.UTF8.GetBytes(appSettings.Value.JWTSecret)
                 );
+                ClaimsIdentity claims = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim("UserID", user.Id.ToString()),
+                    new Claim("Gender", user.Gender.ToString()),
+                    new Claim("Age", (DateTime.Now.Year - user.DOB.Year).ToString()),
+                    new Claim(ClaimTypes.Role,roles.First()),
+                });
+                if (user.LibararyID != null)
+                    claims.AddClaim(new Claim("LibraryID", user.LibararyID.ToString()!));
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
-                    Subject = new ClaimsIdentity(new Claim[]
-                    {
-                        new Claim("UserID", user.Id.ToString())
-                    }),
+                    Subject = claims,
                     Expires = DateTime.UtcNow.AddDays(10),
                     SigningCredentials = new SigningCredentials(
                         signInKey,
