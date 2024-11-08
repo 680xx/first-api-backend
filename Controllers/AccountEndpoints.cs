@@ -13,9 +13,11 @@ public static class AccountEndpoints
     }
 
     [Authorize]
-    private static async Task<IResult> GetUserProfile(ClaimsPrincipal user, UserManager<AppUser> userManager)
+    private static async Task<IResult> GetUserProfile(
+        ClaimsPrincipal user,
+        UserManager<AppUser> userManager)
     {
-        string userID = user.Claims.First(x => x.Type == "UserID").Value;
+        string userID = user.Claims.First(x => x.Type == "userID").Value;
         var userDetails = await userManager.FindByIdAsync(userID);
         return Results.Ok(
             new

@@ -57,6 +57,7 @@ namespace first_api_backend.Controllers
 
             if (result.Succeeded)
                 return Results.Ok(result);
+            
             else
                 return Results.BadRequest(result);
         }
@@ -75,17 +76,19 @@ namespace first_api_backend.Controllers
                 );
                 ClaimsIdentity claims = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("UserID", user.Id.ToString()),
-                    new Claim("Gender", user.Gender.ToString()),
-                    new Claim("Age", (DateTime.Now.Year - user.DOB.Year).ToString()),
+                    new Claim("userID", user.Id.ToString()),
+                    new Claim("gender", user.Gender.ToString()),
+                    new Claim("age", (DateTime.Now.Year - user.DOB.Year).ToString()),
                     new Claim(ClaimTypes.Role,roles.First()),
                 });
+                
                 if (user.LibararyID != null)
-                    claims.AddClaim(new Claim("LibraryID", user.LibararyID.ToString()!));
+                    claims.AddClaim(new Claim("libraryID", user.LibararyID.ToString()!));
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Subject = claims,
-                    Expires = DateTime.UtcNow.AddDays(10),
+                    Expires = DateTime.UtcNow.AddMinutes(1),
+                    // Expires = DateTime.UtcNow.AddDays(10),
                     SigningCredentials = new SigningCredentials(
                         signInKey,
                         SecurityAlgorithms.HmacSha256Signature
