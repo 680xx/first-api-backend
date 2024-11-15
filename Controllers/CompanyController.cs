@@ -1,8 +1,10 @@
+using System.Security.Claims;
 using first_api_backend.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using first_api_backend.Context;
+using Serilog;
 
 
 namespace first_api_backend.Controllers
@@ -50,6 +52,7 @@ namespace first_api_backend.Controllers
             }
             await _context.Companies.AddAsync(company);
             await _context.SaveChangesAsync();
+            Log.Information("A new company has been added");
             return CreatedAtAction(nameof(GetCompany), new { id = company.Id }, company);
         }
 
