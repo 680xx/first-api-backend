@@ -34,6 +34,9 @@ namespace first_api_backend.Controllers
         {
             app.MapPost("/signup", CreateUser);
             app.MapPost("/signin", SignIn);
+            app.MapPut("/updateuser/{userId}", UpdateUser);
+            app.MapDelete("/deleteuser/{userId}", DeleteUser);
+            app.MapGet("/users", GetAllUsers);
             return app;
         }
         
@@ -61,7 +64,77 @@ namespace first_api_backend.Controllers
             else
                 return Results.BadRequest(result);
         }
+        
+        // [Authorize(Roles = "Admin")]
+        [AllowAnonymous]
+        public static async Task<IResult> GetAllUsers(UserManager<AppUser> userManager)
+        {
+            // Hämta alla användare
+            var users = userManager.Users.ToList(); 
 
+            if (users == null || users.Count == 0)
+            {
+                return Results.NotFound(new { message = "No users found" });
+            }
+
+            var userModels = users.Select(user => new 
+            {
+                user.Id,
+                user.UserName,
+                user.Email,
+                user.FullName,
+                user.Gender,
+                Age = DateTime.Now.Year - user.DOB.Year,  // Beräkna ålder från födelsedatum
+                user.LibararyID
+            }).ToList();
+
+            return Results.Ok(userModels);
+        }
+
+        // [Authorize(Roles = "Admin")]
+        [AllowAnonymous]
+        public static async Task<IResult> UpdateUser(UserManager<AppUser> userManager,
+            [FromBody] UserRegistrationModel userRegistrationModel, string userId)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                return Results.NotFound(new { message = "User not found" });
+            }
+
+            user.FullName = userRegistrationModel.FullName ?? user.FullName;
+            user.Gender = userRegistrationModel.Gender ?? user.Gender;
+            user.DOB = userRegistrationModel.Age != null ? DateOnly.FromDateTime(DateTime.Now.AddYears(-userRegistrationModel.Age)) : user.DOB;
+            user.LibararyID = userRegistrationModel.LibraryID ?? user.LibararyID;
+
+            var result = await userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+                return Results.Ok(user);
+            else
+                return Results.BadRequest(result);
+        }
+        
+        // [Authorize(Roles = "Admin")]
+        [AllowAnonymous]
+        public static async Task<IResult> DeleteUser(UserManager<AppUser> userManager, string userId)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                return Results.NotFound(new { message = "User not found" });
+            }
+
+            var result = await userManager.DeleteAsync(user);
+
+            if (result.Succeeded)
+                return Results.Ok(new { message = "User deleted successfully" });
+            else
+                return Results.BadRequest(result);
+        }
+        
         [AllowAnonymous]
         private static async Task<IResult> SignIn(UserManager<AppUser> userManager,
             [FromBody] LoginModel loginModel,

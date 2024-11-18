@@ -9,16 +9,16 @@ public static class AuthorizationDemoEndpoints
         app.MapGet("/AdminOnly", AdminOnly);
         
         app.MapGet("/AdminOrOwner", [Authorize(Roles = "Admin, Owner")] () =>
-        { return "Admin Or Owner"; });
+            { return "Admin Or Owner"; });
         
         app.MapGet("/LibraryMembersOnly", [Authorize(Policy = "HasLibraryId")] () => 
-        { return "Library members only"; });
+            { return "Library members only"; });
         
         app.MapGet("/FemaleUsersOnly", [Authorize(Roles = "User", Policy = "FemalesOnly")] () => 
-        { return "Female users only"; });
+            { return "Female users only"; });
         
         app.MapGet("/MaleUsersUnderAgeOf10Only", [Authorize(Roles = "User", Policy = "MaleOnly")] [Authorize(Policy = "Under10")] () => 
-        { return "Male users under the age of 10 only"; });
+            { return "Male users under the age of 10 only"; });
         
         return app;
     }
