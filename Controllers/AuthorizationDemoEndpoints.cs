@@ -6,7 +6,7 @@ public static class AuthorizationDemoEndpoints
 {
     public static IEndpointRouteBuilder MapAuthorizationEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/AdminOnly", AdminOnly);
+        /*app.MapGet("/AdminOnly", AdminOnly);*/
         
         app.MapGet("/AdminOrOwner", [Authorize(Roles = "Admin, Owner")] () =>
             { return "Admin Or Owner"; });
@@ -23,9 +23,9 @@ public static class AuthorizationDemoEndpoints
         return app;
     }
 
-    [Authorize(Roles = "Admin")]
+    /*[Authorize(Roles = "Admin")]
     private static string AdminOnly()
     {
         return "Admin only";
-    }
+    }*/
 }

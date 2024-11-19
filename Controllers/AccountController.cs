@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Identity;
+/*using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace YourNamespace.Controllers
+namespace first_api_backend.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -47,4 +47,4 @@ namespace YourNamespace.Controllers
             return Ok("Logged out.");
         }
     }
-}
+}*/
