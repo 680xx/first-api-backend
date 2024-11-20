@@ -1,8 +1,10 @@
+using first_api_backend;
 using first_api_backend.Controllers;
 using first_api_backend.Extensions;
 using first_api_backend.Models;
-using Serilog
-    ;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +16,14 @@ builder.Services.AddSwaggerExplorer()
                 .InjectDbContext(builder.Configuration)
                 .AddAppConfig(builder.Configuration)
                 .AddIdentityHandlersAndStores()
-                .ConfigureIdentityOptions()
                 .AddIdentityAuth(builder.Configuration);
+
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.SignIn.RequireConfirmedEmail = true; // Kräver verifierad e-post för inloggning
+});
 
 // Will write the logs in the console.
 /*builder.Host.UseSerilog((context, configuration) =>

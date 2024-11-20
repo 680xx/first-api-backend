@@ -16,6 +16,6 @@ public class AppUser:IdentityUser
     [PersonalData]
     public DateOnly DOB { get; set; }
     
-    [PersonalData]
-    public int? LibararyID { get; set; }
+    /*[PersonalData]
+    public int? LibararyID { get; set; }*/
 }
